@@ -59,13 +59,14 @@ app.post('/', function (req, res) {
           console.error('err: couldn\'t load player name');
         }
       } else {
-        console.error("error loading trophies!");
+        console.error('error loading trophies!');
         trophiesData = trophiesDefault;
         playerName = null;
       }
     });
   }catch(e){
-    console.error("error w/ psn callback");
+    console.error('error w/ psn callback');
+    console.log(account.email);
     trophiesData = trophiesDefault;
     playerName = null;
   }
