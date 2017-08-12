@@ -19,7 +19,8 @@ function getRandomInt(min, max) {
 
 //OFC this won't work if you don't add the env file!
 //add an env file with valid PSN accounts for this to work
-var accounts = [];
+
+/*var accounts = [];
 
 for(var i = 0; i < parseInt(process.env.ACC_AMOUNT); i++){
   accounts.push({
@@ -28,7 +29,7 @@ for(var i = 0; i < parseInt(process.env.ACC_AMOUNT); i++){
   });
 }
 
-var account = accounts[getRandomInt(0, accounts.length - 1)];
+var account = accounts[getRandomInt(0, accounts.length - 1)];*/
 
 var zodiacId = 'NPWR11367_00';
 
@@ -41,13 +42,14 @@ app.use(bodyParser.urlencoded({
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+/*
 gumerPSN.init({	
 	debug:		false			
 	,email:		account.email	
 	,password:	account.pass
 	,npLanguage:	'en'	
 	,region: 		'us'
-});
+});*/
 
 app.get('/', function(request, response) {
   response.render('pages/index', {
@@ -57,7 +59,7 @@ app.get('/', function(request, response) {
 });
 
 app.post('/', function (req, res) {
-  try{
+  /*try{
     gumerPSN.getGameTrophies(req.body.psn, zodiacId, '', function(error, trophyData){
       if (!error) {
         try{
@@ -76,7 +78,7 @@ app.post('/', function (req, res) {
     console.error("error w/ psn callback");
     trophiesData = trophiesDefault;
     playerName = null;
-  }
+  }*/
   
   res.render('pages/index', {
     trophies: trophiesData.trophies,
