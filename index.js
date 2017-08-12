@@ -15,8 +15,8 @@ var app = express();
 
 var zodiacId = 'NPWR11367_00';
 var accounts = [];
-var trophiesData = trophiesDefault;
-var playerName = null;
+//var trophiesData = trophiesDefault;
+//var playerName = null;
 
 app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname + '/public'));
@@ -48,36 +48,36 @@ gumerPSN.init({
 
 app.get('/', function(request, response) {
   response.render('pages/index', {
-      trophies: trophiesData.trophies,
-      playerName: playerName
+      trophies: trophiesDefault.trophies,
+      playerName: null
   });
 });
 
 app.post('/', function (req, res) {
   try{
     gumerPSN.getGameTrophies(req.body.psn, zodiacId, '', function(error, trophyData){
+      var result = trophiesDefault;
+      var name = null;
       if (!error) {
         try{
-          playerName = trophyData.trophies[0].comparedUser.onlineId;
-          trophiesData = trophyData;
+          name = trophyData.trophies[0].comparedUser.onlineId;
+          result = trophyData;
         }catch(e){
           console.error('err: couldn\'t load player name');
         }
       } else {
         console.error('error loading trophies!');
-        trophiesData = trophiesDefault;
-        playerName = null;
+        //name = null;
       }
       res.render('pages/index', {
-        trophies: trophiesData.trophies,
-        playerName: playerName
+        trophies: result.trophies,
+        playerName: name
       });
     });
   }catch(e){
     console.error('error w/ psn callback');
     console.error(e);
-    trophiesData = trophiesDefault;
-    playerName = null;
+   // playerName = null;
   }
 });
 
