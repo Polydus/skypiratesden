@@ -9,6 +9,7 @@ function getRandomInt(min, max) {
 }
 
 var express = require('express');
+var bodyParser = require("body-parser");
 var gumerPSN = require(__dirname + '/lib/psn.js');
 var app = express();
 
@@ -19,6 +20,10 @@ var playerName = null;
 
 app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
@@ -63,19 +68,17 @@ app.post('/', function (req, res) {
         trophiesData = trophiesDefault;
         playerName = null;
       }
+      res.render('pages/index', {
+        trophies: trophiesData.trophies,
+        playerName: playerName
+      });
     });
   }catch(e){
-    //console.error('error w/ psn callback');
-    //console.error(account.email);
+    console.error('error w/ psn callback');
+    console.error(e);
     trophiesData = trophiesDefault;
     playerName = null;
   }
-  
-  res.render('pages/index', {
-    trophies: trophiesData.trophies,
-    playerName: playerName
-  });
 });
 
-app.listen(app.get('port'), function() {
-});
+app.listen(app.get('port'), function() {});
