@@ -4,7 +4,7 @@ var trophiesDefault = { "trophies": [
 ]};
 
 var express = require('express');
-var gumerPSN = require(__dirname + '/lib/psn.js');
+//var gumerPSN = require(__dirname + '/lib/psn.js');
 var app = express();
 
 app.set('port', (process.env.PORT || 8080));
@@ -18,19 +18,6 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-//OFC this won't work if you don't add the env file!
-//add an env file with valid PSN accounts for this to work
-
-/*var accounts = [];
-
-for(var i = 0; i < parseInt(process.env.ACC_AMOUNT); i++){
-  accounts.push({
-      email: process.env['ACC_' + i + '_EMAIL'],
-      pass: process.env['ACC_' + i + '_PASS']
-  });
-}
-
-var account = accounts[getRandomInt(0, accounts.length - 1)];*/
 
 var zodiacId = 'NPWR11367_00';
 
@@ -39,14 +26,6 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-/*
-gumerPSN.init({	
-	debug:		false			
-	,email:		account.email	
-	,password:	account.pass
-	,npLanguage:	'en'	
-	,region: 		'us'
-});*/
 
 app.get('/', function(request, response) {
   response.render('pages/index', {
@@ -55,33 +34,4 @@ app.get('/', function(request, response) {
   });
 });
 
-app.post('/', function (req, res) {
-  /*try{
-    gumerPSN.getGameTrophies(req.body.psn, zodiacId, '', function(error, trophyData){
-      if (!error) {
-        try{
-          playerName = trophyData.trophies[0].comparedUser.onlineId;
-          trophiesData = trophyData;
-        }catch(e){
-          console.error('err: couldn\'t load player name');
-        }
-      } else {
-        console.error("error loading trophies!");
-        trophiesData = trophiesDefault;
-        playerName = null;
-      }
-    });
-  }catch(e){
-    console.error("error w/ psn callback");
-    trophiesData = trophiesDefault;
-    playerName = null;
-  }*/
-  
-  res.render('pages/index', {
-    trophies: trophiesData.trophies,
-    playerName: playerName
-  });
-});
 
-
-app.listen(8080); 
