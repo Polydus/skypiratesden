@@ -29,7 +29,17 @@ for(var i = 0; i < parseInt(process.env.ACC_AMOUNT); i++){
   });
 }
 
+//OFC this won't work if you don't add the env file!
+//add an env file with valid PSN accounts for this to work
 var account = accounts[getRandomInt(0, accounts.length - 1)];
+
+gumerPSN.init({	
+	debug:		false			
+	,email:		account.email	
+	,password:	account.pass
+	,npLanguage:	'en'	
+	,region: 		'us'
+});
 
 app.get('/', function(request, response) {
   response.render('pages/index', {
