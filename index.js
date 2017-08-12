@@ -4,9 +4,10 @@ var trophiesDefault = { "trophies": [
 ]};
 
 var express = require('express');
-var bodyParser = require("body-parser");
 var gumerPSN = require(__dirname + '/lib/psn.js');
 var app = express();
+
+app.set('port', (process.env.PORT || 8080));
 
 var trophiesData = trophiesDefault;
 var playerName = null;
@@ -34,10 +35,6 @@ var account = accounts[getRandomInt(0, accounts.length - 1)];*/
 var zodiacId = 'NPWR11367_00';
 
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-  app.use(bodyParser.json());
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
