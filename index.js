@@ -34,7 +34,7 @@ for(var i = 0; i < parseInt(process.env.ACC_AMOUNT); i++){
 var account = accounts[getRandomInt(0, accounts.length - 1)];
 
 gumerPSN.init({	
-	debug:		false			
+	debug:		true			
 	,email:		account.email	
 	,password:	account.pass
 	,npLanguage:	'en'	
@@ -65,8 +65,8 @@ app.post('/', function (req, res) {
       }
     });
   }catch(e){
-    console.error('error w/ psn callback');
-    console.log(account.email);
+    //console.error('error w/ psn callback');
+    //console.error(account.email);
     trophiesData = trophiesDefault;
     playerName = null;
   }
