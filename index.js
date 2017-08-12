@@ -38,5 +38,33 @@ app.get('/', function(request, response) {
   });
 });
 
+app.post('/', function (req, res) {
+  try{
+    gumerPSN.getGameTrophies(req.body.psn, zodiacId, '', function(error, trophyData){
+      if (!error) {
+        try{
+          playerName = trophyData.trophies[0].comparedUser.onlineId;
+          trophiesData = trophyData;
+        }catch(e){
+          console.error('err: couldn\'t load player name');
+        }
+      } else {
+        console.error("error loading trophies!");
+        trophiesData = trophiesDefault;
+        playerName = null;
+      }
+    });
+  }catch(e){
+    console.error("error w/ psn callback");
+    trophiesData = trophiesDefault;
+    playerName = null;
+  }
+  
+  res.render('pages/index', {
+    trophies: trophiesData.trophies,
+    playerName: playerName
+  });
+});
+
 app.listen(app.get('port'), function() {
 });
