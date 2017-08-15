@@ -7,5 +7,21 @@ This is a remake of the [Sky Pirate's Den](http://finalfantasy.wikia.com/wiki/Sk
 This application is currently hosted [on Heroku](http://skypiratesden.herokuapp.com/).
 
 
+#### How to run the Sky Pirate's Den Locally
+
+With NPM, Node and Heroku installed, run the following:
+
+```sh
+$ git clone https://github.com/polydus/skypiratesden.git
+$ cd skypiratesden/
+$ npm install
+$ cp .env.example .env
+```
+
+Add a valid PSN account to the .env file, then run: 
+
+```sh
+$ heroku local
+```
 
 
